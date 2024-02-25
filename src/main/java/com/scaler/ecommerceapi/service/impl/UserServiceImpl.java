@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUser(String email) {
-        List<UserEntity> userEntityList =  userDAO.getUser(email);
+    public List<User> getUserByEmailAddress(String email) {
+        List<UserEntity> userEntityList =  userDAO.getUserByEmail(email);
         return entityListToUserList(userEntityList);
     }
 
@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
     }
     private User getUserFromUserEntity(UserEntity userEntity) {
         User user = new User();
+        user.setUserId(userEntity.getUserId());
         user.setUserName(userEntity.getUserName());
         user.setEmail(userEntity.getEmail());
         user.setPassword(userEntity.getPassword());

@@ -12,12 +12,16 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
+
     @Column(name = "user_name")
     private String userName;
-    @Column
+
+    @Column(nullable = false)
     private String email;
-    @Column
+
+    @Column(nullable = false)
     private String password;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 

@@ -10,5 +10,5 @@ public interface UserDAO {
 
      void registerUser(UserEntity userEntity);
 
-     List<UserEntity> getUser(String userEntity);
+     List<UserEntity> getUserByEmail(String userEntity);
 }

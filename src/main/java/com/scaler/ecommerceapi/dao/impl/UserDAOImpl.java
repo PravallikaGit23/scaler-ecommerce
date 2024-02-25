@@ -1,5 +1,6 @@
 package com.scaler.ecommerceapi.dao.impl;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.scaler.ecommerceapi.dao.UserDAO;
 import com.scaler.ecommerceapi.entity.UserEntity;
 import com.scaler.ecommerceapi.model.User;
@@ -16,20 +17,19 @@ public class UserDAOImpl implements UserDAO {
     UserRepository userRepository;
     @Override
     public void registerUser(UserEntity userEntity) {
-        if(!userRepository.findByEmail(userEntity.getEmail()).isEmpty()){
+
+        if(userRepository.findByEmail(userEntity.getEmail()).isEmpty()){
             userRepository.save(userEntity);
-        }else{
-            System.out.println("User with email address "+userEntity.getEmail()+" is already exist");
+        }else {
+            System.out.println("User with email address " + userEntity.getEmail() + " is already exist");
         }
-
-
     }
 
     @Override
-    public List<UserEntity> getUser(String email) {
+    public List<UserEntity> getUserByEmail(String email) {
       List<UserEntity> userEntityList = userRepository.findByEmail(email);
      if(userEntityList.isEmpty()){
-         System.out.print("No records found!");
+         System.out.println("no records found");
      }
     return userEntityList;
     }
