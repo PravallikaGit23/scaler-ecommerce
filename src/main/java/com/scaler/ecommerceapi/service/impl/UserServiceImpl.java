@@ -7,10 +7,13 @@ import com.scaler.ecommerceapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     UserDAO userDAO;
     @Override
@@ -18,6 +21,12 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = getUserEntity(user);
           userDAO.registerUser(userEntity);
 
+    }
+
+    @Override
+    public List<User> getUser(String email) {
+        List<UserEntity> userEntityList =  userDAO.getUser(email);
+        return entityListToUserList(userEntityList);
     }
 
     private UserEntity getUserEntity(User user) {
@@ -30,5 +39,22 @@ public class UserServiceImpl implements UserService {
         userEntity.setUpdatedTime(new Date());
 
        return userEntity;
+    }
+    private User getUserFromUserEntity(UserEntity userEntity) {
+        User user = new User();
+        user.setUserName(userEntity.getUserName());
+        user.setEmail(userEntity.getEmail());
+        user.setPassword(userEntity.getPassword());
+        user.setPhoneNumber(userEntity.getPhoneNumber());
+        return user;
+    }
+
+    public List<User> entityListToUserList(List<UserEntity> userEntityList) {
+        List<User> userList = new ArrayList<>();
+        for (UserEntity userEntity : userEntityList) {
+            User user = getUserFromUserEntity(userEntity);
+            userList.add(user);
+        }
+        return userList;
     }
 }
