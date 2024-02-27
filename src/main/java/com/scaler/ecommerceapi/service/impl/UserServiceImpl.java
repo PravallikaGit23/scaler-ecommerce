@@ -29,6 +29,16 @@ public class UserServiceImpl implements UserService {
         return entityListToUserList(userEntityList);
     }
 
+    public List<User> userLogin(User user){
+
+           List<UserEntity> userEntityList =   userDAO.getUserByEmailAndPassword(user.getEmail(),user.getPassword());
+            if(userEntityList.isEmpty()){
+            System.out.println(" check your emailId and password ! ");
+            }
+           return entityListToUserList(userEntityList);
+
+    }
+
     private UserEntity getUserEntity(User user) {
        UserEntity userEntity = new UserEntity();
         userEntity.setUserName(user.getUserName());

@@ -27,4 +27,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByEmailAddress(email));
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<List<User>> userLogin(@RequestBody User user){
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.userLogin(user));
+    }
+
 }

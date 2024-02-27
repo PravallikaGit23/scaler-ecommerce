@@ -1,9 +1,7 @@
 package com.scaler.ecommerceapi.dao.impl;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.scaler.ecommerceapi.dao.UserDAO;
 import com.scaler.ecommerceapi.entity.UserEntity;
-import com.scaler.ecommerceapi.model.User;
 import com.scaler.ecommerceapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,5 +30,10 @@ public class UserDAOImpl implements UserDAO {
          System.out.println("no records found");
      }
     return userEntityList;
+    }
+
+    public List<UserEntity> getUserByEmailAndPassword(String email, String password){
+
+        return userRepository.findByEmailAndPassword(email, password);
     }
 }

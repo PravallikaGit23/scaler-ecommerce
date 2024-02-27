@@ -10,4 +10,5 @@ public interface UserService {
     public void registerUser(User user);
 
     List<User> getUserByEmailAddress(String email);
+     List<User> userLogin(User user);
 }
